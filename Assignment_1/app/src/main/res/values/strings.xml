@@ -7,4 +7,5 @@
     <string name="message1">Enter Number 1</string>
     <string name="Message2">Enter Number 2</string>
     <string name="act_launch">Launch Activity 2</string>
+    <string name="result_key">Result :</string>
 </resources>
