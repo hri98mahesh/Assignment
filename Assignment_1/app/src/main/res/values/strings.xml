@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My First App</string>
+    <string name="text">Hello There</string>
+    <string name="button_send">Send</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="cal_sum">Calculate Sum</string>
+    <string name="message1">Enter Number 1</string>
+    <string name="Message2">Enter Number 2</string>
+    <string name="act_launch">Launch Activity 2</string>
+</resources>

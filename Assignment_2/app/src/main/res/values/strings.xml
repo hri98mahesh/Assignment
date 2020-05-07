@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Assignment_2</string>
+    <string name="title">Survey Title</string>
+    <string name="Quest">Did you watch \"Big Bang Theory Yesterday\" ?</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+</resources>
