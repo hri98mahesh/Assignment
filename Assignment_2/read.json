@@ -1,0 +1,31 @@
+[
+  {
+    "title": "Survey Title",
+    "questions": [
+      {
+        "question": "Did you watch Big Bang Theory Yesterday?",
+        "type": "Radio Button",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "question": "Did you watch Big Bang Theory Yesterday?",
+        "type": "Radio Button",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "question": "Did you watch Big Bang Theory Yesterday?",
+        "type": "Radio Button",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      }
+    ]
+  }
+]
