@@ -1,6 +1,8 @@
 package com.example.assignment_2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.Gravity;
@@ -19,21 +21,25 @@ import java.util.*;
 import static android.view.Gravity.*;
 
 public class MainActivity extends AppCompatActivity {
-
+    MyRecyclerViewAdapter adapter;
+    TextView titleText;
+    String title;
+    List<String> questions = new ArrayList<String>();
+    List<ArrayList<String>> options = new ArrayList<ArrayList<String>>();
+    List<String> type = new ArrayList<String>();
+    ArrayList<Set<Integer>> markedOptions = new ArrayList<>();
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        read_json_and_set_view();
-
+        read_json();
+        titleText = findViewById(R.id.titleText);
+        titleText.setText(title);
+        addQuestionToRecycleView();
     }
 
-    public void read_json_and_set_view(){
+    public void read_json(){
         String json;
-        String title;
-        List<String> questions = new ArrayList<String>();
-        List<ArrayList<String>> options = new ArrayList<ArrayList<String>>();
-        List<String> type = new ArrayList<String>();
         try {
             InputStream is = getAssets().open("read.json");
             int size = is.available();
@@ -41,11 +47,21 @@ public class MainActivity extends AppCompatActivity {
             is.read(buffer);
             is.close();
             json = new String(buffer,"UTF-8");
+
+            if(json=="" || json==null){
+                return ;
+            }
             JSONParser parser = new JSONParser();
             Object obj = parser.parse(json);
             JSONArray jsonArray =  (JSONArray)obj;
             Iterator<JSONObject> iterator = jsonArray.iterator();
             JSONObject o = iterator.next();
+            if(o==null){
+                return ;
+            }
+            if(!(o.containsKey("title") && o.containsKey("questions"))) {
+                return;
+            }
             title = (String)o.get("title");
             JSONArray ques = (JSONArray)o.get("questions");
             iterator = ques.iterator();
@@ -53,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject temp = iterator.next();
                 questions.add((String)temp.get("question"));
                 type.add((String)temp.get("type"));
+                markedOptions.add(new HashSet<Integer>());
                 ArrayList<String> temp_list = new ArrayList<String>();
                 JSONArray type_list = (JSONArray) temp.get("options");
                 Iterator<String> iterator2 = type_list.iterator();
@@ -63,34 +80,18 @@ public class MainActivity extends AppCompatActivity {
                 }
                 options.add(temp_list);
             }
-            LinearLayout myLinearLayout = (LinearLayout) findViewById(R.id.linearLayout1);
-            final TextView titleView = new TextView(this);
-            titleView.setText(title);
-            titleView.setTextSize(30);
-            titleView.setGravity(Gravity.CENTER);
-            myLinearLayout.addView(titleView);
-            RadioGroup rg;
-            RadioButton rb;
-            for(int i=0;i<questions.size();i++){
-                final TextView rowTextView = new TextView(this);
-                rg = new RadioGroup(this);
-                for(int j=0;j<options.get(i).size();j++){
-                    rb = new RadioButton(this);
-                    rb.setText(options.get(i).get(j));
-                    rb.setTextSize(15);
-                    rg.addView(rb);
-                }
-                rg.setOrientation(RadioGroup.VERTICAL);
-                rowTextView.setText(questions.get(i));
-                rowTextView.setTextSize(20);
-                rowTextView.setPadding(0,100,0,0);
-                myLinearLayout.addView(rowTextView);
-                myLinearLayout.addView(rg);
-            }
         }
         catch(Exception e){
             System.out.println(e);
         }
+    }
+
+    public void addQuestionToRecycleView(){
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new MyRecyclerViewAdapter(this,questions,options,type,markedOptions);
+        recyclerView.setAdapter(adapter);
     }
 
 }

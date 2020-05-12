@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="titleSize">30dp</dimen>
+    <dimen name="recyclerPadding">20dp</dimen>
+    <dimen name="topPadding">15dp</dimen>
+    <dimen name="bottomPadding">15dp</dimen>
+    <dimen name="horizontalPadding">15dp</dimen>
+    <dimen name="textSize">20dp</dimen>
+    <dimen name="lineWidth">3dp</dimen>
+</resources>
