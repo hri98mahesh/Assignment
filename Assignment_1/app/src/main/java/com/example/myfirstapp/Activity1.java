@@ -25,11 +25,17 @@ public class Activity1 extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==0 && resultCode == Activity1.RESULT_OK){
-            TextView resultText = (TextView) findViewById(R.id.resultText);
-            if(resultText!=null) {
-                resultText.setText(data.getStringExtra(Activity2.result_key));
+        TextView resultText = (TextView) findViewById(R.id.resultText);
+        if(requestCode == 0 && resultCode == Activity1.RESULT_OK){
+            if((resultText != null) && (data != null)) {
+                resultText.setText("Result : "+Integer.toString(data.getIntExtra(Activity2.result_key,0)));
             }
+            else{
+                resultText.setText("Result : ");
+            }
+        }
+        else{
+            resultText.setText("Result : ");
         }
     }
 

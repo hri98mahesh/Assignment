@@ -20,13 +20,13 @@ public class Activity2 extends AppCompatActivity {
         EditText firstNumber = (EditText) findViewById(R.id.first_number);
         EditText secondNumber = (EditText) findViewById(R.id.second_number);
         int firstNum=0,secondNum = 0;
-        if(firstNumber!=null){
+        if(firstNumber != null){
             firstNum = Integer.parseInt(firstNumber.getText().toString());
         }
-        if(secondNumber!=null){
+        if(secondNumber != null){
             secondNum = Integer.parseInt(secondNumber.getText().toString());
         }
-        intent.putExtra(this.result_key,"Result : "+Integer.toString(firstNum+secondNum));
+        intent.putExtra(this.result_key,firstNum+secondNum);
         setResult(Activity1.RESULT_OK,intent);
         finish();
     }
