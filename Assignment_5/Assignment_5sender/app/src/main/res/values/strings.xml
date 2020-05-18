@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Assignment_5sender</string>
+    <string name="BroadcastMessage">Please Enter the Message to be Broadcasted</string>
+    <string name="Button">Send Broadcast</string>
+</resources>

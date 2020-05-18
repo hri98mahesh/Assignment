@@ -15,9 +15,6 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     }
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.v("onReceive",intent.getStringExtra("key"));
-        Toast.makeText(mContext,intent.getStringExtra("key"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,intent.getStringExtra("key"), Toast.LENGTH_SHORT).show();
     }
-
-
 }
