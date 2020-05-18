@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     String url = "https://dummyimage.com/3400X3400/000000/0011ff.png&text=Hello";
+//    "https://dummyimage.com/3400X3400/000000/0011ff.png&text=Hello";
     public static TextView textView ;
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -36,9 +37,21 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             super.onReceiveResult(resultCode, resultData);
+            TextView textView_temp = findViewById(R.id.progress);
+            if(resultCode == DownloadService.URL_TYPE){
+                String message = resultData.getString("DownloadCategory");
+                if(message=="INVALID"){
+                     textView_temp.setText("Invalid URL");
+                }
+                if(message=="PROBLEM"){
+                    textView_temp.setText("Problem while downloading the file");
+                }
+                if(message=="ALREADY_EXIST"){
+                    textView_temp.setText("File is already Downloaded");
+                }
+            }
             if (resultCode == DownloadService.UPDATE_PROGRESS) {
                 int progress = resultData.getInt("progress");
-                TextView textView_temp = findViewById(R.id.progress);
                 if (progress == 100) {
                     textView_temp.setText("Downloaded");
                 }
