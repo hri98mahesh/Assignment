@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("key",editText.getText().toString());
         intent.setComponent(new ComponentName(receiverPackageName, receiverName));
         editText.setText("");
+        Log.v("sendBroadcastOnClick","MessageSent");
         sendBroadcast(intent,permission);
     }
 }

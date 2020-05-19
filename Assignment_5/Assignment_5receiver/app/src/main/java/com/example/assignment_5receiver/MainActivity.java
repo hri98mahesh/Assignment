@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         IntentFilter intentFilter = new IntentFilter("com.pkg.perform.MultipleBroadcast");
-        MyReceiver = new MyBroadcastReceiver(getApplicationContext(),this);
+        MyReceiver = new MyBroadcastReceiver();
         if(intentFilter != null)
         {
             registerReceiver(MyReceiver, intentFilter);
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         Log.v("onResume","Integer.toString(size)");
+        Toast.makeText(this, "message", Toast.LENGTH_SHORT).show();
         SharedPreferences sharedPref = this.getSharedPreferences(preference_file_key, Context.MODE_PRIVATE);
         Set<String> broadcastMessage = sharedPref.getStringSet(message_key, null);
         if(broadcastMessage != null){

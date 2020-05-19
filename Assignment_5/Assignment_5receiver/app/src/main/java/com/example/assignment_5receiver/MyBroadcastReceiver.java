@@ -21,9 +21,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     public String message_key = "Message_key_to_find_values";
     public String intentAction = "com.pkg.perform.MultipleBroadcast";
 
-    public MyBroadcastReceiver(Context context,Context context1){
-        mContext = context;
-        actContext = context1;
+    public MyBroadcastReceiver(){
     }
 
     @Override
