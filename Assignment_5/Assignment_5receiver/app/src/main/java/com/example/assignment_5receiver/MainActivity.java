@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -37,11 +38,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         Log.v("onResume","Integer.toString(size)");
-        Toast.makeText(this, "message", Toast.LENGTH_SHORT).show();
         SharedPreferences sharedPref = this.getSharedPreferences(preference_file_key, Context.MODE_PRIVATE);
         Set<String> broadcastMessage = sharedPref.getStringSet(message_key, null);
         if(broadcastMessage != null){
-            for(String message : broadcastMessage){
+            Iterator<String> it = broadcastMessage.iterator();
+            while(it.hasNext()){
+                String message = it.next();
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
             }
             SharedPreferences.Editor editor = sharedPref.edit();

@@ -24,14 +24,16 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     public MyBroadcastReceiver(){
     }
 
+    public MyBroadcastReceiver(Context context){
+        mContext = context;
+    }
     @Override
     public void onReceive(Context context, Intent intent) {
         if(intentAction.equals(intent.getAction())){
             Log.v("onReceive",intent.getStringExtra("key"));
             String message = intent.getStringExtra("key");
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            SharedPreferences sharedPref;
-            sharedPref = actContext.getSharedPreferences(preference_file_key, Context.MODE_PRIVATE);
+            SharedPreferences sharedPref = context.getSharedPreferences(preference_file_key, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             Set<String> broadcastMessages = sharedPref.getStringSet(message_key, new HashSet<String>());
             broadcastMessages.add(message);

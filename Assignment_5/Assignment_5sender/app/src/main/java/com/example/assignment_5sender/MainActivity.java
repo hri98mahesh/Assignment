@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     public void sendBroadcastOnClick( View view){
         EditText editText;
         editText = (EditText) findViewById(R.id.broadcastMessage);
