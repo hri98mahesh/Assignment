@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private MyBroadcastReceiver MyReceiver;
@@ -33,21 +35,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume(){
+        super.onResume();
+        Log.v("onResume","Integer.toString(size)");
         SharedPreferences sharedPref = this.getSharedPreferences(preference_file_key, Context.MODE_PRIVATE);
-        int size = sharedPref.getInt(total_broadcast,0);
-        int i=0;
-        while(i < size){
-            String text = sharedPref.getString(message_key+"/"+Integer.toString(i),default_string);
-            Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
-            i++;
-            try{
-                Thread.sleep(100);
+        Set<String> broadcastMessage = sharedPref.getStringSet(message_key, null);
+        if(broadcastMessage != null){
+            for(String message : broadcastMessage){
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
             }
-            catch(Exception e){
-
-            }
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putStringSet(message_key, new HashSet<String>());
+            editor.apply();
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

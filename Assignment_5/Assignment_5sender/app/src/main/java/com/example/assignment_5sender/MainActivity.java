@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String receiverPackageName = "com.example.assignment_5receiver";
+    public static final String receiverName = "com.example.assignment_5receiver.MyBroadcastReceiver";
+    public static final String permission = "com.assignment.PERMISSION_TO_BROADCAST";
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
@@ -25,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
         final Intent intent=new Intent();
         intent.setAction("com.pkg.perform.MultipleBroadcast");
         intent.putExtra("key",editText.getText().toString());
+        intent.setComponent(new ComponentName(receiverPackageName, receiverName));
         editText.setText("");
-        sendBroadcast(intent);
+        sendBroadcast(intent,permission);
     }
 }
